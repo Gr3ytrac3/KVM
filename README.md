@@ -1,12 +1,13 @@
 # External Drive VM Storage Setup for QEMU/KVM
 
-![License: MIT](https://github.com/Gr3ytrac3/KVM/blob/8c05cf5fe85e32ac140fcf03d6fc4090e5f14166/Screenshot%20From%202025-08-21%2020-18-05.png)
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/8c05cf5fe85e32ac140fcf03d6fc4090e5f14166/Screenshot%20From%202025-08-21%2020-18-05.png)
 
 > A comprehensive guide to solving VM storage limitations by leveraging external drives with QEMU/KVM and Virt-Manager on Fedora
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Fedora](https://img.shields.io/badge/Fedora-42+-blue.svg)](https://getfedora.org/)
-[![QEMU/KVM](https://img.shields.io/badge/QEMU%2FKVM-Compatible-green.svg)](https://www.qemu.org/)
+[![QEMU](https://img.shields.io/badge/QEMU-FF6600?style=for-the-badge&logo=qemu&logoColor=white)](https://www.qemu.org/)
+[![KVM](https://img.shields.io/badge/KVM-326CE5?style=for-the-badge&logo=linux&logoColor=white)](https://www.linux-kvm.org/)
+[![Virt-Manager](https://img.shields.io/badge/Virt--Manager-4285F4?style=for-the-badge&logo=vmware&logoColor=white)](https://virt-manager.org/)
+[![Fedora](https://img.shields.io/badge/Fedora-294172?style=for-the-badge&logo=fedora&logoColor=white)](https://getfedora.org/)
 
 ## 🚀 Quick Start
 
@@ -22,7 +23,7 @@ df -h /mnt/vm_storage          # Check available space
 
 ## 📋 Prerequisites
 
-- Fedora Linux (tested on 42+)
+- Fedora Linux (tested on 42+) or any other Linux Distribution
 - External drive with sufficient space (100GB+ recommended)
 - CPU with virtualization support (Intel VT-x or AMD-V)
 - Administrative privileges
