@@ -1,3 +1,5 @@
+[![License: MIT](https://github.com/Gr3ytrac3/KVM/blob/8c05cf5fe85e32ac140fcf03d6fc4090e5f14166/Screenshot%20From%202025-08-21%2020-18-05.png)
+
 # External Drive VM Storage Setup for QEMU/KVM
 
 > A comprehensive guide to solving VM storage limitations by leveraging external drives with QEMU/KVM and Virt-Manager on Fedora
