@@ -1,8 +1,10 @@
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 # External Drive VM Storage Setup for QEMU/KVM
 
 > A comprehensive guide to solving VM storage limitations by leveraging external drives with QEMU/KVM and Virt-Manager on Fedora
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Fedora](https://img.shields.io/badge/Fedora-42+-blue.svg)](https://getfedora.org/)
+[![QEMU/KVM](https://img.shields.io/badge/QEMU%2FKVM-Compatible-green.svg)](https://www.qemu.org/)
 
 ## 🚀 Quick Start
 
