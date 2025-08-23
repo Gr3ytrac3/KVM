@@ -523,7 +523,7 @@ mkdir -p /mnt/vm_storage/{isos,images,templates}
 # Verify setup
 ls -la /mnt/vm_storage/
 ```
-You can equally do the same from GParter once done with setting the permissions
+## You can equally do the same from GParter once done with setting the permissions
 ---
 
 ## 🗄️ Libvirt Storage Pool
@@ -587,7 +587,7 @@ Available:      278.20 GiB
 ### 1. Download ISO Files
 
 You can create a folder in your new patition to store your .iso files. Do this only if you gave enough space to your partition ( not less than 250GB)
-![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/7dba2543ea2bcba08825afad829404eb1ffe19f6/screenshoots/Screenshot%20From%202025-08-20%2020-04-57.png)
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/51d83bb5fdbf373d25ebeee976336be0bd347dab/screenshoots/Screenshot%20From%202025-08-23%2018-22-30.png)
 ```bash
 # Navigate to ISO directory
 cd /mnt/vm_storage/isos
@@ -612,6 +612,8 @@ wget https://download.fedoraproject.org/pub/fedora/linux/releases/39/Server/x86_
    - **Step 4**: **Critical** - Storage configuration
 
 3. **Storage Configuration**
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/51d83bb5fdbf373d25ebeee976336be0bd347dab/screenshoots/Screenshot%20From%202025-08-20%2001-47-24.png)
+
    - ✅ Check "Enable storage for this virtual machine"
    - Click **"Manage..."**
    - Select **`vm_storage`** pool
@@ -623,9 +625,9 @@ wget https://download.fedoraproject.org/pub/fedora/linux/releases/39/Server/x86_
 
 4. **Complete VM Setup**
    - **Step 5**: Review and customize hardware
-   - Click **"Begin Installation"**
+   - Click **"Begin Installation"** (top right)
 
-### 3. Alternative CLI Method
+### 3. Alternative CLI Method (not recommended but still an option)
 
 ```bash
 # Create VM using virt-install
@@ -639,6 +641,16 @@ virt-install \
     --graphics spice \
     --os-variant ubuntu22.04
 ```
+### 3.1 Sharing Partition with Vms
+
+By default Virt-Manager allows you to share any external peripheral with your VMs. But that prompts your device to display on the VM, not on the host. The best way is to set it as a storage hardware. The below image shows you how to add your patition as a storage hardware. When you run the Vm it will display. 
+
+**Note**: Avoid allowing every VMs to write anything to the partition. It can corrupt its content in other Vms where you added it too. The best approach is to set it as read-only. With that set, you can copy files, docs into your VMs but not modify it, to avoid inconsistency from the main VM that has access to it.
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/51d83bb5fdbf373d25ebeee976336be0bd347dab/screenshoots/Screenshot%20From%202025-08-20%2009-53-39.png)
+
+**Make sure you entered the correct partition mounting point**
+
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/51d83bb5fdbf373d25ebeee976336be0bd347dab/screenshoots/Screenshot%20From%202025-08-20%2009-55-34.png)
 
 ---
 
@@ -703,12 +715,15 @@ virsh pool-autostart vm_storage
 
 #### 🚨 Permission Issues
 ```bash
-# Fix ownership and permissions
+# Fix ownership and permissions (set 755 or 777)
 sudo chown -R $USER:libvirt /mnt/vm_storage
 sudo chmod -R 755 /mnt/vm_storage
 
 # Check SELinux context (if enabled)
 sudo restorecon -R /mnt/vm_storage
+
+# Check Groups. kvm, libvirt and quemu should be listed among other groups
+groups
 ```
 
 #### 🚨 External Drive Not Mounting
@@ -721,6 +736,8 @@ sudo mount UUID=$(sudo blkid -s UUID -o value /dev/sda3) /mnt/vm_storage
 
 # Check filesystem for errors
 sudo fsck /dev/sda3
+
+# Mount it from GParter
 ```
 
 #### 🚨 VM Won't Start
