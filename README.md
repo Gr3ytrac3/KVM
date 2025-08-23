@@ -16,9 +16,9 @@
 
 ```bash
 # Quick verification of your setup
-lsblk                           # Check drive layout
+lsblk                          # Check drive layout
 virsh pool-list --all          # Verify storage pools
-df -h /mnt/vm_storage          # Check available space
+df -h                          # report file system space usage
 ```
 
 ## 📋 Prerequisites
@@ -39,7 +39,7 @@ df -h /mnt/vm_storage          # Check available space
 
 ## 📖 Table of Contents
 
-1. [Problem Statement & Motivation](#-problem-statement--motivation)
+1. [Problem](#-problem)
 2. [System Requirements](#-system-requirements)
 3. [Installation & Setup](#-installation--setup)
 4. [External Drive Configuration](#-external-drive-configuration)
@@ -52,7 +52,7 @@ df -h /mnt/vm_storage          # Check available space
 
 ---
 
-## 🎯 Problem Statement & Motivation
+## 🎯 Problem
 
 ### The Challenge
 - **Limited Internal Storage**: System's internal drive insufficient for multiple VMs
