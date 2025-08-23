@@ -169,11 +169,12 @@ sda2 is the default path of your external drive, automounted by defautlt without
 We'll create and properly mount sda3, which will be dedicated for the vm storage.
 
 ### 2. Backup Critical Data
-> 🚨 **CRITICAL**: Backup all important data before proceeding with partitioning
+> 🚨 **CRITICAL**: Backup all important data before proceeding with partitioning. Although not really necessary if sure of you, but preventive against the shrinking process
 
 ### 3. Partition Management
 
 #### Using GParted (Recommended for beginners)
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/19d006f8e6ff2a27d559e590fa8e5be985d9c507/screenshoots/Screenshot%20From%202025-08-19%2021-44-07.png)
 ```bash
 # Install GParted
 sudo dnf install gparted
@@ -184,6 +185,8 @@ sudo gparted
 
 **Steps in GParted:**
 1. Select your external drive (e.g., `/dev/sda`)
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/19d006f8e6ff2a27d559e590fa8e5be985d9c507/screenshoots/Screenshot%20From%202025-08-19%2021-47-55.png)
+
 2. Right-click existing partition → **"Resize/Move"**
 3. Drag boundary to create unallocated space
 4. Right-click unallocated space → **"New"**
