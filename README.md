@@ -77,7 +77,7 @@ df -h                          # report file system space usage
 - **USB**: USB 3.0+ port for optimal performance
 
 ### Software Requirements
-- **OS**: Fedora Linux 39+ (adaptable to other RPM-based distros)
+- **OS**: Fedora Linux 39+ (adaptable to other RPM-based distros) or other Distros
 - **Packages**: QEMU/KVM, libvirt, virt-manager
 - **Permissions**: User account with sudo access
 
@@ -86,11 +86,25 @@ df -h                          # report file system space usage
 # Check virtualization support
 lscpu | grep Virtualization
 
+# To check if virtualization is enabled in the BIOS/UEFI on a Linux system (such as Fedora).
+egrep -c '(vmx|svm)' /proc/cpuinfo
+# If zero (0) is returned then you'll have to turn off your pc and log into the BIOS/UEFI to enable it.
+
+# Verify that the KVM kernel modules are loaded by running:
+lsmod | grep kvm
+
+# KVM requires a CPU with virtualization extensions, found on most consumer CPUs. These extensions are called Intel VT or AMD-V. To check whether you have CPU support, run the following command:
+grep -E '^flags.*(vmx|svm)' /proc/cpuinfo
+# If this command results in nothing printed, your system does not support the relevant virtualization extensions. You can still use QEMU/KVM, but the emulator will fall back to software virtualization, which is much slower.
+
 # Verify available space
 df -h
 
 # Check USB port speed
 lsusb -t
+
+
+# If the checks were positive then you're good to go.
 ```
 
 ---
