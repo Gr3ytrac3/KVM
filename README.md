@@ -541,7 +541,7 @@ You can equally do the same from GParter once done with setting the permissions
 
 3. **Create New Storage Pool**
    - Click **"+"** (Add Pool)
-   - **Name**: `vm_storage`
+   - **Name**: `vm_storage` (your new partion name)
    - **Type**: `dir: Filesystem Directory`
    - **Target Path**: `/mnt/vm_storage`
    - Click **Finish**
@@ -586,6 +586,8 @@ Available:      278.20 GiB
 
 ### 1. Download ISO Files
 
+You can create a folder in your new patition to store your .iso files. Do this only if you gave enough space to your partition ( not less than 250GB)
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/7dba2543ea2bcba08825afad829404eb1ffe19f6/screenshoots/Screenshot%20From%202025-08-20%2020-04-57.png)
 ```bash
 # Navigate to ISO directory
 cd /mnt/vm_storage/isos
@@ -596,6 +598,7 @@ wget https://download.fedoraproject.org/pub/fedora/linux/releases/39/Server/x86_
 ```
 
 ### 2. Create VM Using Virt-Manager
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/7dba2543ea2bcba08825afad829404eb1ffe19f6/screenshoots/Screenshot%20From%202025-08-19%2011-35-39.png)
 
 1. **Launch virt-manager and create new VM**
    ```bash
