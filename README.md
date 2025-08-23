@@ -446,7 +446,7 @@ qemu-img create -f qcow2 -o preallocation=full disk.qcow2 20G
 ### ✅ Organization
 ```
 /mnt/vm_storage/
-├── images/           # VM disk files
+├── images/          # VM disk files
 ├── isos/            # Installation media  
 ├── templates/       # Base VM templates
 ├── snapshots/       # VM snapshots
@@ -464,13 +464,19 @@ qemu-img create -f qcow2 -o preallocation=full disk.qcow2 20G
 
 ---
 
-3. Drag boundary to create unallocated space
+3. Drag boundary to create unallocated space after entering the space you want to shrink and attribute to the new partition.
+**"Before you proceed:"** You need to confirm and complete the shrinking process. For that, click on the "operation pending" zone at the bottom left corner of GParted after you're done. You should see the following display. Wait until it's done
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/021176ef524b8d7663dede81011db92409bd564d/screenshoots/Screenshot%20From%202025-08-19%2022-13-21.png)
+
 4. Right-click unallocated space → **"New"**
 5. Configure new partition:
    - **Label**: `vm_storage`
    - **File System**: `ext4`
    - **Size**: Remaining space
-6. Apply all operations
+6. Apply all operations (same zone at the bottom eft corner). 
+Once the process is done, sure to mount it (Part 4)
+
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/021176ef524b8d7663dede81011db92409bd564d/screenshoots/Screenshot%20From%202025-08-19%2023-39-16.png)
 
 #### Using CLI (Advanced users)
 ```bash
@@ -505,6 +511,7 @@ df -h /mnt/vm_storage
 ```
 
 ### 5. Set Proper Permissions
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/021176ef524b8d7663dede81011db92409bd564d/screenshoots/Screenshot%20From%202025-08-19%2023-44-44.png)
 
 ```bash
 # Change ownership to current user
@@ -516,7 +523,7 @@ mkdir -p /mnt/vm_storage/{isos,images,templates}
 # Verify setup
 ls -la /mnt/vm_storage/
 ```
-
+You can equally do the same from GParter once done with setting the permissions
 ---
 
 ## 🗄️ Libvirt Storage Pool
