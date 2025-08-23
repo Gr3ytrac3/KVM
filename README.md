@@ -187,7 +187,349 @@ sudo gparted
 1. Select your external drive (top right corner as in the image below) (e.g., `/dev/sda`)
 ![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/19d006f8e6ff2a27d559e590fa8e5be985d9c507/screenshoots/Screenshot%20From%202025-08-19%2021-47-55.png)
 
-2. Right-click existing partition → **"Resize/Move"**
+2. Right-click existing partition → **"Resize/Move"** 
+🚨 This is an important stage. You'll have to decide on the size of space you want to shrink and dedicate to the other partition. Please take note of the used space on your disk before entering the space you wish to shrink. If the sapce isn't enough for you then transfer or detele some unwanted data from it. Get back to GParted once you're done. If this stage is skipped, you might end up loosing important data. If you're done, then you can proceed.
+
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/f352fbc254ce0df5e553c5e3a90ee5e196f81f2b/screenshoots/Screenshot%20From%202025-08-23%2016-47-58.png)
+
+# VM Storage Space Calculation
+
+>Learn to calculate and convert storage units for VM partitioning
+
+## Quick Start
+
+Need to quickly convert storage units for VM planning? Jump to the [Quick Reference Table](#-quick-reference-table) or use our [Storage Calculator](#-storage-calculator).
+
+## Table
+
+1. [Understanding Storage Units](#-understanding-storage-units)
+2. [Conversion Formulas](#-conversion-formulas)
+3. [Quick Reference Table](#-quick-reference-table)
+4. [VM Size Planning](#-vm-size-planning)
+5. [Storage Calculator](#-storage-calculator)
+6. [Practical Examples](#-practical-examples)
+7. [Common Pitfalls](#-common-pitfalls)
+
+---
+
+## 🔢 Understanding Storage Units
+
+### The Two Systems
+
+When working with VM storage, you'll encounter two different measurement systems:
+
+| **Decimal (SI Units)** | **Binary (IEC Units)** |
+|------------------------|-------------------------|
+| Used by drive manufacturers | Used by operating systems |
+| Base-10 (powers of 1000) | Base-2 (powers of 1024) |
+| KB, MB, GB, TB | KiB, MiB, GiB, TiB |
+
+### Unit Definitions
+
+| Unit | Value (Bytes) | Type | Common Usage |
+|------|---------------|------|--------------|
+| **1 KB (Kilobyte)** | 1,000 | Decimal | Drive specifications |
+| **1 KiB (Kibibyte)** | 1,024 | Binary | OS reporting |
+| **1 MB (Megabyte)** | 1,000,000 | Decimal | File sizes |
+| **1 MiB (Mebibyte)** | 1,048,576 (1024²) | Binary | RAM allocation |
+| **1 GB (Gigabyte)** | 1,000,000,000 | Decimal | Drive capacity |
+| **1 GiB (Gibibyte)** | 1,073,741,824 (1024³) | Binary | Actual usable space |
+
+> 💡 **Key Insight**: Linux and virtualization tools (QEMU, virt-manager) typically use **binary units** (MiB, GiB)
+
+---
+
+## 🔄 Conversion Formulas
+
+### GB (Decimal) → MiB (Binary)
+
+```
+MiB = (GB × 1,000,000,000) ÷ 1,048,576
+```
+
+**Example**: Convert 20 GB to MiB
+```
+(20 × 1,000,000,000) ÷ 1,048,576 ≈ 19,073 MiB
+```
+
+### MiB (Binary) → GB (Decimal)
+
+```
+GB = (MiB × 1,048,576) ÷ 1,000,000,000
+```
+
+**Example**: Convert 4096 MiB to GB
+```
+(4096 × 1,048,576) ÷ 1,000,000,000 ≈ 4.3 GB
+```
+
+### Quick Approximation
+
+For rough calculations, you can use these approximation factors:
+
+| Conversion | Factor |
+|------------|--------|
+| **GB to MiB** | Multiply by ~953.7 |
+| **MiB to GB** | Divide by ~1024, then multiply by 1.0737 |
+| **MiB to GiB** | Divide by 1024 |
+
+---
+
+## 📊 Quick Reference Table
+
+| Decimal (GB) | Binary Equivalent (GiB) | Binary Equivalent (MiB) |
+|--------------|-------------------------|-------------------------|
+| 5 GB | ≈ 4.66 GiB | ≈ 4,768 MiB |
+| 10 GB | ≈ 9.31 GiB | ≈ 9,537 MiB |
+| 20 GB | ≈ 18.63 GiB | ≈ 19,073 MiB |
+| 50 GB | ≈ 46.57 GiB | ≈ 47,684 MiB |
+| 100 GB | ≈ 93.13 GiB | ≈ 95,367 MiB |
+| 200 GB | ≈ 186.26 GiB | ≈ 190,735 MiB |
+| 500 GB | ≈ 465.66 GiB | ≈ 476,837 MiB |
+| 1000 GB (1TB) | ≈ 931.32 GiB | ≈ 953,674 MiB |
+
+---
+
+## 🖥️ VM Size Planning
+
+### Typical VM Storage Requirements
+
+| **VM Type** | **Minimum** | **Recommended** | **With Development Tools** |
+|-------------|-------------|-----------------|----------------------------|
+| **Alpine Linux** | 2 GiB | 4 GiB | 8 GiB |
+| **Ubuntu Server** | 8 GiB | 15 GiB | 25 GiB |
+| **Ubuntu Desktop** | 15 GiB | 25 GiB | 40 GiB |
+| **Fedora Workstation** | 20 GiB | 30 GiB | 50 GiB |
+| **Windows 10** | 32 GiB | 50 GiB | 80 GiB |
+| **Windows 11** | 40 GiB | 60 GiB | 100 GiB |
+| **Kali Linux** | 15 GiB | 25 GiB | 40 GiB |
+| **CentOS/RHEL** | 10 GiB | 20 GiB | 35 GiB |
+
+### Additional Space Considerations
+
+| **Component** | **Typical Size** | **Notes** |
+|---------------|------------------|-----------|
+| **ISO Files** | 1-6 GB each | Store in dedicated folder |
+| **VM Snapshots** | 10-50% of VM size | Per snapshot |
+| **Swap Space** | Equal to VM RAM | If enabled in guest |
+| **Log Files** | 1-5 GiB | Over time |
+| **Growth Buffer** | 20-30% extra | For updates and data |
+
+---
+
+## 🧮 Storage Calculator
+
+### Planning Example: Multi-VM Setup
+
+**Scenario**: Setting up a development environment with multiple VMs
+
+```
+Planned VMs:
+├── Ubuntu Server (Web Dev)    : 20 GiB
+├── Windows 11 (Testing)       : 60 GiB
+├── Kali Linux (Security)      : 25 GiB
+├── CentOS (Production Test)   : 20 GiB
+└── Alpine (Container Test)    : 5 GiB
+
+Additional Storage:
+├── ISO Files                  : 15 GiB
+├── VM Snapshots (estimated)   : 30 GiB
+├── Templates                  : 10 GiB
+└── Growth Buffer (25%)        : 41 GiB
+
+Total Required: 226 GiB ≈ 243 GB
+```
+
+### Calculation Steps
+
+1. **Sum VM requirements**: 130 GiB
+2. **Add additional storage**: 55 GiB  
+3. **Calculate subtotal**: 185 GiB
+4. **Add growth buffer (25%)**: 41 GiB
+5. **Total needed**: 226 GiB
+6. **Convert to decimal**: ~243 GB
+
+### Recommended Partition Size
+
+For the above scenario, create a **250-300 GB** partition to ensure adequate space.
+
+---
+
+## 💡 Practical Examples
+
+### Example 1: Converting Manufacturer Specs
+
+**Problem**: You have a 500 GB external drive. How much usable space for VMs?
+
+**Solution**:
+```
+500 GB × 0.9313 = 465.66 GiB usable space
+```
+
+**Planning**: You can comfortably fit 8-10 moderate-sized VMs.
+
+### Example 2: VM Disk Creation
+
+**Problem**: Creating a VM with virt-manager showing "20 GB" option.
+
+**Reality**:
+```
+20 GB = 18.63 GiB actual usable space in guest OS
+```
+
+**Best Practice**: Plan for slightly larger sizes than guest OS requirements.
+
+### Example 3: Existing Drive Partitioning
+
+**Problem**: 1TB external drive, want to keep 400 GB for personal data.
+
+**Available for VMs**:
+```
+600 GB available = 558.79 GiB for VM storage
+```
+
+**Can Support**:
+- 15-20 lightweight VMs, or
+- 8-12 full desktop VMs, or  
+- 4-6 Windows VMs with development tools
+
+---
+
+## ⚠️ Common Pitfalls
+
+### 1. Unit Confusion
+```bash
+# ❌ Wrong assumption
+"My 1TB drive should give me 1024 GB of VM space"
+
+# ✅ Reality  
+"My 1TB drive gives me ~931 GiB of actual VM storage"
+```
+
+### 2. Insufficient Growth Planning
+```bash
+# ❌ Tight planning
+VM Size: Exactly what guest OS needs
+
+# ✅ Smart planning
+VM Size: Guest OS needs + 30% buffer for updates/data
+```
+
+### 3. Forgetting Overhead
+```bash
+# ❌ Missing components
+Total = Sum of VM disk sizes
+
+# ✅ Complete calculation
+Total = VM disks + ISOs + snapshots + templates + buffer
+```
+
+### 4. Sparse vs. Allocated Confusion
+```bash
+# qcow2 sparse allocation (default)
+qemu-img create -f qcow2 disk.qcow2 20G
+# Creates 20G capacity but uses minimal actual space initially
+
+# Pre-allocated (uses full space immediately)  
+qemu-img create -f qcow2 -o preallocation=full disk.qcow2 20G
+```
+
+---
+
+## 🛠️ Tools and Commands
+
+### Check Actual Disk Usage
+```bash
+# VM image actual size
+qemu-img info /path/to/vm-disk.qcow2
+
+# Directory space usage
+du -sh /mnt/vm_storage/
+
+# Available space
+df -h /mnt/vm_storage
+```
+
+### Storage Pool Information
+```bash
+# Libvirt pool info
+virsh pool-info vm_storage
+
+# List all volumes with sizes
+virsh vol-list vm_storage --details
+```
+
+### Monitoring Tools
+```bash
+# Real-time space monitoring
+watch -n 5 'df -h /mnt/vm_storage'
+
+# Detailed usage by VM
+du -h /mnt/vm_storage/images/* | sort -h
+```
+
+---
+
+## 🎯 Best Practices
+
+### ✅ Smart Planning
+1. **Always add 20-30% buffer** for growth and snapshots
+2. **Use sparse allocation** (qcow2 default) to save initial space  
+3. **Monitor usage regularly** to prevent space exhaustion
+4. **Plan for snapshots** - they can be 10-50% of VM size each
+
+### ✅ Organization
+```
+/mnt/vm_storage/
+├── images/           # VM disk files
+├── isos/            # Installation media  
+├── templates/       # Base VM templates
+├── snapshots/       # VM snapshots
+└── backups/         # VM backups
+```
+
+### ✅ Maintenance
+```bash
+# Weekly space check script
+#!/bin/bash
+echo "=== VM Storage Usage Report ==="
+df -h /mnt/vm_storage
+echo
+echo "=== Largest VM Images ==="
+du -h /mnt/vm_storage/images/* | sort -hr | head -5
+echo  
+echo "=== Available Pool Space ==="
+virsh pool-info vm_storage
+```
+
+---
+
+## 📚 Additional Resources
+
+- **[Binary Prefix (Wikipedia)](https://en.wikipedia.org/wiki/Binary_prefix)** - Understanding unit differences
+- **[QEMU Disk Images](https://www.qemu.org/docs/master/system/images.html)** - Official QEMU documentation
+- **[Libvirt Storage](https://libvirt.org/storage.html)** - Storage pool management
+- **[Virt-Manager Guide](https://virt-manager.org/documentation/)** - GUI management
+
+---
+
+## 🤝 Contributing
+
+Found an error in calculations or want to add more examples? Contributions are welcome!
+
+1. Fork this repository
+2. Add your improvements
+3. Submit a pull request
+
+---
+
+## 📄 License
+
+This guide is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+**💡 Pro Tip**: Bookmark this guide for quick reference during VM planning and partition setup!
 3. Drag boundary to create unallocated space
 4. Right-click unallocated space → **"New"**
 5. Configure new partition:
