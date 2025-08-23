@@ -192,7 +192,7 @@ sudo gparted
 
 ![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/f352fbc254ce0df5e553c5e3a90ee5e196f81f2b/screenshoots/Screenshot%20From%202025-08-23%2016-47-58.png)
 
-# VM Storage Space Calculation
+## VM Storage Space Calculation
 
 >Learn to calculate and convert storage units for VM partitioning
 
@@ -432,40 +432,6 @@ qemu-img create -f qcow2 disk.qcow2 20G
 
 # Pre-allocated (uses full space immediately)  
 qemu-img create -f qcow2 -o preallocation=full disk.qcow2 20G
-```
-
----
-
-## 🛠️ Tools and Commands
-
-### Check Actual Disk Usage
-```bash
-# VM image actual size
-qemu-img info /path/to/vm-disk.qcow2
-
-# Directory space usage
-du -sh /mnt/vm_storage/
-
-# Available space
-df -h /mnt/vm_storage
-```
-
-### Storage Pool Information
-```bash
-# Libvirt pool info
-virsh pool-info vm_storage
-
-# List all volumes with sizes
-virsh vol-list vm_storage --details
-```
-
-### Monitoring Tools
-```bash
-# Real-time space monitoring
-watch -n 5 'df -h /mnt/vm_storage'
-
-# Detailed usage by VM
-du -h /mnt/vm_storage/images/* | sort -h
 ```
 
 ---
