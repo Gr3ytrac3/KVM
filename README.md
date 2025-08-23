@@ -612,6 +612,7 @@ wget https://download.fedoraproject.org/pub/fedora/linux/releases/39/Server/x86_
    - **Step 4**: **Critical** - Storage configuration
 
 3. **Storage Configuration**
+**Never change the default name given by virt-manager**
 ![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/51d83bb5fdbf373d25ebeee976336be0bd347dab/screenshoots/Screenshot%20From%202025-08-20%2001-47-24.png)
 
    - ✅ Check "Enable storage for this virtual machine"
