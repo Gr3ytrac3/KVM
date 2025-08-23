@@ -151,12 +151,22 @@ lsblk
 sudo fdisk -l
 ```
 
-**Expected output example:**
+**Expected output example (yours won't show up another partition if you have none):**
 ```
-NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
-sda      8:0    0 931.5G  0 disk 
-├─sda1   8:1    0   600G  0 part /media/external_data
-└─sda2   8:2    0   300G  0 part 
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+sda           8:0    0 465.8G  0 disk 
+├─sda1        8:1    0    16M  0 part 
+├─sda2        8:2    0 186.3G  0 part /run/media/gr3ytrac3/500 GB
+└─sda3        8:3    0 279.5G  0 part /mnt/vm_storage
+zram0       251:0    0     8G  0 disk [SWAP]
+nvme0n1     259:0    0 238.5G  0 disk 
+├─nvme0n1p1 259:1    0   600M  0 part /boot/efi
+├─nvme0n1p2 259:2    0     1G  0 part /boot
+└─nvme0n1p3 259:3    0 236.9G  0 part /home
+                                      /
+
+sda2 is the default path of your external drive, automounted by defautlt without a proper mounting point.
+We'll create and properly mount sda3, which will be dedicated for the vm storage.
 ```
 
 ### 2. Backup Critical Data
