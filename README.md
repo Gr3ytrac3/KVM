@@ -164,10 +164,9 @@ nvme0n1     259:0    0 238.5G  0 disk
 ├─nvme0n1p2 259:2    0     1G  0 part /boot
 └─nvme0n1p3 259:3    0 236.9G  0 part /home
                                       /
-
-sda2 is the default path of your external drive, automounted by defautlt without a proper mounting point.
-We'll create and properly mount sda3, which will be dedicated for the vm storage.
 ```
+**sda2 is the default path of your external drive, automounted by defautlt without a proper mounting point.
+We'll create and properly mount sda3, which will be dedicated for the vm storage.**
 
 ### 2. Backup Critical Data
 > 🚨 **CRITICAL**: Backup all important data before proceeding with partitioning
