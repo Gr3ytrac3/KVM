@@ -184,7 +184,7 @@ sudo gparted
 ```
 
 **Steps in GParted:**
-1. Select your external drive (e.g., `/dev/sda`)
+1. Select your external drive (top right corner as in the image below) (e.g., `/dev/sda`)
 ![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/19d006f8e6ff2a27d559e590fa8e5be985d9c507/screenshoots/Screenshot%20From%202025-08-19%2021-47-55.png)
 
 2. Right-click existing partition → **"Resize/Move"**
