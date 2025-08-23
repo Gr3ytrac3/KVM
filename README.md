@@ -523,7 +523,7 @@ mkdir -p /mnt/vm_storage/{isos,images,templates}
 # Verify setup
 ls -la /mnt/vm_storage/
 ```
-## You can equally do the same from GParter once done with setting the permissions
+## You can equally do the same from disk panel in linux
 ---
 
 ## 🗄️ Libvirt Storage Pool
@@ -648,10 +648,20 @@ By default Virt-Manager allows you to share any external peripheral with your VM
 **Note**: Avoid allowing every VMs to write anything to the partition. It can corrupt its content in other Vms where you added it too. The best approach is to set it as read-only. With that set, you can copy files, docs into your VMs but not modify it, to avoid inconsistency from the main VM that has access to it.
 ![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/51d83bb5fdbf373d25ebeee976336be0bd347dab/screenshoots/Screenshot%20From%202025-08-20%2009-53-39.png)
 
-**Make sure you entered the correct partition mounting point**
 
+**Make sure you entered the correct partition mounting point**
 ![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/51d83bb5fdbf373d25ebeee976336be0bd347dab/screenshoots/Screenshot%20From%202025-08-20%2009-55-34.png)
 
+
+**You can eddit the XML display in case of permission issues**
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/5c62568db86bb74e532e3ce4b3ff489389823ad5/screenshoots/Screenshot%20From%202025-08-23%2018-51-55.png)
+
+
+**Enter your user password in order to access the added partition**
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/5c62568db86bb74e532e3ce4b3ff489389823ad5/screenshoots/Screenshot_debian13_2025-08-20_09%3A57%3A32.png)
+
+
+**Enter your user password in order to access the added partition**
 ---
 
 ## 🧪 Testing & Verification
@@ -821,6 +831,22 @@ virsh vol-list vm_storage
 
 ---
 
+## Successfully Installed VMs
+
+Debian13:
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/5c62568db86bb74e532e3ce4b3ff489389823ad5/screenshoots/Screenshot_debian13_2025-08-20_09%3A34%3A20.png)
+
+Kali:
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/5c62568db86bb74e532e3ce4b3ff489389823ad5/screenshoots/Screenshot_linux2024_2025-08-20_15%3A23%3A46.png)
+
+Partition Structure with each VMs.qcow2 file:
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/5c62568db86bb74e532e3ce4b3ff489389823ad5/screenshoots/Screenshot%20From%202025-08-20%2020-04-57.png)
+
+End Result in Virt-Manager:
+![IMAGE: HEARDER](https://github.com/Gr3ytrac3/KVM/blob/5c62568db86bb74e532e3ce4b3ff489389823ad5/screenshoots/Screenshot%20From%202025-08-20%2020-00-36.png)
+
+---
+
 ## 🎉 Results and Benefits
 
 This setup successfully addresses storage limitations by:
@@ -873,7 +899,7 @@ If you encounter any problems or have questions:
 1. **Check the [Troubleshooting](#-troubleshooting) section**
 2. **Search existing [Issues](../../issues)**
 3. **Create a new issue** with:
-   - Your system specs (Fedora version, hardware)
+   - Your system specs (Fedora version or other Linux Distro, hardware)
    - Complete error messages
    - Steps you've already tried
 
