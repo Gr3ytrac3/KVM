@@ -208,7 +208,6 @@ Need to quickly convert storage units for VM planning? Jump to the [Quick Refere
 4. [VM Size Planning](#-vm-size-planning)
 5. [Storage Calculator](#-storage-calculator)
 6. [Practical Examples](#-practical-examples)
-7. [Common Pitfalls](#-common-pitfalls)
 
 ---
 
@@ -454,20 +453,6 @@ qemu-img create -f qcow2 -o preallocation=full disk.qcow2 20G
 └── backups/         # VM backups
 ```
 
-### ✅ Maintenance
-```bash
-# Weekly space check script
-#!/bin/bash
-echo "=== VM Storage Usage Report ==="
-df -h /mnt/vm_storage
-echo
-echo "=== Largest VM Images ==="
-du -h /mnt/vm_storage/images/* | sort -hr | head -5
-echo  
-echo "=== Available Pool Space ==="
-virsh pool-info vm_storage
-```
-
 ---
 
 ## 📚 Additional Resources
@@ -479,23 +464,8 @@ virsh pool-info vm_storage
 
 ---
 
-## 🤝 Contributing
-
-Found an error in calculations or want to add more examples? Contributions are welcome!
-
-1. Fork this repository
-2. Add your improvements
-3. Submit a pull request
-
----
-
-## 📄 License
-
-This guide is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
 **💡 Pro Tip**: Bookmark this guide for quick reference during VM planning and partition setup!
+
 3. Drag boundary to create unallocated space
 4. Right-click unallocated space → **"New"**
 5. Configure new partition:
