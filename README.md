@@ -464,8 +464,6 @@ qemu-img create -f qcow2 -o preallocation=full disk.qcow2 20G
 
 ---
 
-**💡 Pro Tip**: Bookmark this guide for quick reference during VM planning and partition setup!
-
 3. Drag boundary to create unallocated space
 4. Right-click unallocated space → **"New"**
 5. Configure new partition:
