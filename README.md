@@ -906,4 +906,4 @@ If you encounter any problems or have questions:
 
 ---
 
-**⭐ If this guide helped you, please consider giving it a star!**
+**⭐ If this guide helped you, consider giving it a star!**
